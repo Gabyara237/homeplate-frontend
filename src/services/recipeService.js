@@ -11,6 +11,18 @@ const index = async ()=>{
     }
 }
 
+const show = async (recipeId) =>{
+    try {
+        const res= await fetch(`${BASE_URL}/${recipeId}`,{
+            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+        })
+        return res.json()
+    }catch (err){
+       console.log(err)
+    }
+}
+
 export{
     index,
+    show
 }
