@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 const App = () => {
 
   const [recipes, setRecipes] = useState([])
-console.log('App rendered');
 
   useEffect(()=>{
     const fetchAllRecipes = async () =>{
