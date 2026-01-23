@@ -53,10 +53,26 @@ const deleteRecipe = async (recipeId)=>{
     }
 }
 
+const udpate = async (recipeId, recipeFormData)=>{
+    try{
+        const res= await fetch(`${BASE_URL}/${recipeId}`,{
+            method: 'PUT',
+            headers:{
+                Authorization: `Beare ${localStorage.getItem('token')}`,
+                "Content-Type": 'application/json',
+            },
+            body: JSON.stringify(recipeFormData),
+        })
+        return res.json();
+    }catch(err){
+        console.log(err)
+    }
+}
 
 export{
     index,
     show,
     create,
-    deleteRecipe
+    deleteRecipe,
+    udpate
 }
