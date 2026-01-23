@@ -1,10 +1,13 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, /*useContext*/ } from 'react';
 import * as recipeService from '../../services/recipeService';
 
+// import { UserContext } from '../../contexts/UserContext';
 
-const RecipeDetails = () =>{
+
+const RecipeDetails = ({handleDeleteRecipe}) =>{
     const {recipeId} = useParams();
+    // const { user } = useContext(UserContext);
 
     const [recipe, setRecipe] = useState(null);
 
@@ -28,6 +31,11 @@ const RecipeDetails = () =>{
           </p>
         </header>
         <p>{recipe.description}</p>
+        {/* {recipe.author._id === user._id && ( */}
+              {/* <> */}
+                <button onClick={()=> handleDeleteRecipe(recipeId)}>Delete</button>
+              {/* </> */}
+            {/* )} */}
       </section>
       <section>
         <h2>Comments</h2>
