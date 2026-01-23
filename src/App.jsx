@@ -22,8 +22,12 @@ const App = () => {
     fetchAllRecipes()
   },[])
 
-  const handleAddRecipe = async (recipeFormData) => {
-    const payload = {
+  const buildPayload= (recipeFormData) => {
+    const normalizedTags = Array.isArray(recipeFormData.tags)
+    ? recipeFormData.tags: recipeFormData.tags.split(",").map((tag) => tag.trim()).filter(Boolean)
+
+
+    const payload={
       title: recipeFormData.title,
       description: recipeFormData.description,
       imageUrl: recipeFormData.imageUrl,
@@ -44,11 +48,12 @@ const App = () => {
         stepDescription: step.stepDescription,
       })),
 
-      tags: recipeFormData.tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
+      tags: normalizedTags,
     };
+    return payload;
+  }
+  const handleAddRecipe = async (recipeFormData) => {
+    const payload= buildPayload(recipeFormData)
     const newRecipe= await recipeService.create(payload);
     setRecipes([newRecipe, ...recipes])
     navigate("/recipes");
@@ -60,12 +65,20 @@ const App = () => {
     navigate('/recipes');
   }
 
+  const handleUpdateRecipe = async (recipeId, recipeFormData) => {
+    const payload= buildPayload(recipeFormData);
+    const updatedRecipe = await recipeService.udpate(recipeId,payload)
+    setRecipes(recipes.map((recipe)=>(recipeId === recipe._id? updatedRecipe:recipe)))
+    navigate(`/recipes/${recipeId}`);
+  };
+
   return(
     <>
       <Routes>
         <Route path='/recipes' element={<Homepage recipes={recipes}/>}/>
         <Route path='/recipes/new' element={<RecipeForm handleAddRecipe={handleAddRecipe} />}/>
         <Route path='/recipes/:recipeId' element={<RecipeDetails handleDeleteRecipe={handleDeleteRecipe}/>}/>
+        <Route path='/recipes/:recipeId/edit' element={<RecipeForm handleUpdateRecipe={handleUpdateRecipe}/>}/>
         
       </Routes>
     </>
