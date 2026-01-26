@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import * as recipeService from './services/recipeService'
 
+import PublicHome from "./components/PublicHome/PublicHome";
 import Homepage from './components/Homepage/Homepage';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import RecipeForm from './components/RecipeForm/RecipeForm';
@@ -77,6 +78,7 @@ const App = () => {
   return(
     <>
       <Routes>
+        <Route path="/" element={<PublicHome />} />
         <Route path='/recipes' element={<Homepage recipes={recipes}/>}/>
         <Route path='/recipes/new' element={<RecipeForm handleAddRecipe={handleAddRecipe} />}/>
         <Route path='/recipes/:recipeId' element={<RecipeDetails handleDeleteRecipe={handleDeleteRecipe}/>}/>
