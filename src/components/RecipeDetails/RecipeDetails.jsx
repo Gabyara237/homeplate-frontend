@@ -1,16 +1,15 @@
 import { useParams, Link } from 'react-router';
-import { useState, useEffect, /*useContext*/ } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as recipeService from '../../services/recipeService';
 
+import { UserContext } from '../../contexts/UserContext';
 import CommentForm from '../CommentForm/CommentForm';
 
-
-// import { UserContext } from '../../contexts/UserContext';
 
 
 const RecipeDetails = ({handleDeleteRecipe}) =>{
     const {recipeId} = useParams();
-    // const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [recipe, setRecipe] = useState(null);
     const [editingCommentId, setEditingCommentId] = useState(null);
@@ -55,12 +54,12 @@ const RecipeDetails = ({handleDeleteRecipe}) =>{
           </p>
         </header>
         <p>{recipe.description}</p>
-        {/* {recipe.author._id === user._id && ( */}
-              {/* <> */}
+        {recipe.author._id === user._id && (
+              <>
                 <Link to={`/recipes/${recipeId}/edit`}>Edit</Link>
                 <button onClick={()=> handleDeleteRecipe(recipeId)}>Delete</button>
-              {/* </> */}
-            {/* )} */}
+              </>
+            )}
       </section>
       <section>
         <h2>Comments</h2>

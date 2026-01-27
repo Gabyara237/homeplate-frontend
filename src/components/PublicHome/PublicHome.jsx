@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import foodImage from '../../assets/food.png';
 import heartImage from '../../assets/heart.png';
 import commentsImage from '../../assets/comments.png'

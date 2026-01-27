@@ -1,21 +1,20 @@
 import { Link } from "react-router";
+import RecipeCard from "../common/RecipeCard.jsx/RecipeCard";
+import * as recipeService from '../../services/recipeService';
+
 
 const RecipeList = ({recipes}) =>{
+    const toggleLike = async (recipeId, shouldLike) => {
+        if (shouldLike) return recipeService.addLike(recipeId);     
+        return recipeService.deleteLike(recipeId);                  
+    };
+
+
     return (
         <main>
-            {
-                recipes.map((recipe)=>(
-                    <Link key={recipe._id} to = {`/recipes/${recipe._id}`}>
-                        <article>
-                            <header>
-                                <h2>{recipe.title}</h2>
-                                <p>{`${recipe.author.username} posted on ${new Date(recipe.createdAt).toLocaleDateString()}`}</p>
-                            </header>
-                            <p>{recipe.description}</p>
-                        </article>
-                    </Link>
-                ))
-            }
+            {recipes.map((recipe) => (
+                <RecipeCard key={recipe._id} recipe={recipe} toggleLike={toggleLike} />
+            ))}
         </main>
     )
 }
