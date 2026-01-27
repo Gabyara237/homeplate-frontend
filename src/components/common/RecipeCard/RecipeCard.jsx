@@ -1,17 +1,20 @@
 import { useContext, useState } from "react";
-
 import { Link } from "react-router";
+
 
 import { UserContext } from '../../../contexts/UserContext';
 
-const RecipeCard=({recipe,toggleLike})=>{
+const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
     const { user } = useContext(UserContext);
     const userId = user?._id;
     const initialLiked = userId ? recipe.likes.includes(userId) : false;
     const initialLikesCount = recipe.likes.length;
-    
+    const authorId =recipe.author._id;
+
     const [liked, setLiked]= useState(initialLiked);
     const [likesCount, setLikesCount] = useState(initialLikesCount)
+   
+    const followed = userId ? followingIds.has(authorId) : false;
 
 
     const handleChangeLike = async()=>{
@@ -32,13 +35,30 @@ const RecipeCard=({recipe,toggleLike})=>{
         }
     }
 
+    const handleChangeFollow = async (targetUserId) =>{
+        if(!userId) return;
+        if(targetUserId === userId) return;
+
+        const nextFollowed = !followed;
+        
+        try {
+            await handleFollow(targetUserId, nextFollowed);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return(
         <div key={recipe._id}> 
+            <div>
+                <p>{recipe.author.username}</p>
+                <button onClick={()=>handleChangeFollow(authorId)}>{followed? "Unfollow":"Follow"}</button>
+            </div>
             <Link to = {`/recipes/${recipe._id}`}>
                 <article>
                     <header>
                         <h2>{recipe.title}</h2>
-                        <p>{`${recipe.author.username} posted on ${new Date(recipe.createdAt).toLocaleDateString()}`}</p>
+                        <p>{`posted on ${new Date(recipe.createdAt).toLocaleDateString()}`}</p>
                     </header>
                         <p>{recipe.description}</p>
                 </article>
