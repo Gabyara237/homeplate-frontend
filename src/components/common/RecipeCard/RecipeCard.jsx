@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router";
 
-import * as followService from '../../../services/followService'
 
 import { UserContext } from '../../../contexts/UserContext';
 
-const RecipeCard=({recipe,toggleLike})=>{
+const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
     const { user } = useContext(UserContext);
     const userId = user?._id;
     const initialLiked = userId ? recipe.likes.includes(userId) : false;
     const initialLikesCount = recipe.likes.length;
+    const authorId =recipe.author._id;
 
     const [liked, setLiked]= useState(initialLiked);
     const [likesCount, setLikesCount] = useState(initialLikesCount)
-    const [followed, setFollowed]= useState(false)
+   
+    const followed = userId ? followingIds.has(authorId) : false;
 
 
     const handleChangeLike = async()=>{
@@ -39,17 +40,10 @@ const RecipeCard=({recipe,toggleLike})=>{
         if(targetUserId === userId) return;
 
         const nextFollowed = !followed;
-
-        setFollowed(nextFollowed)
         
-        try{
-            if(nextFollowed){
-                await followService.followUser(targetUserId)
-            }else{
-                await followService.unfollowUser(targetUserId)
-            }
-        }catch(err){
-            setFollowed(!nextFollowed)
+        try {
+            await handleFollow(targetUserId, nextFollowed);
+        } catch (err) {
             console.log(err)
         }
     }
@@ -58,7 +52,7 @@ const RecipeCard=({recipe,toggleLike})=>{
         <div key={recipe._id}> 
             <div>
                 <p>{recipe.author.username}</p>
-                <button onClick={()=>handleChangeFollow(recipe.author._id)}>{followed? "Unfollow":"Follow"}</button>
+                <button onClick={()=>handleChangeFollow(authorId)}>{followed? "Unfollow":"Follow"}</button>
             </div>
             <Link to = {`/recipes/${recipe._id}`}>
                 <article>
