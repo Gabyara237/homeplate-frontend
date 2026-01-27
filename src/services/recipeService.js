@@ -123,7 +123,22 @@ const updateComment = async (recipeId, commentId, commentFormData) =>{
 const addLike = async (recipeId) =>{
     try{
         const res = await fetch(`${BASE_URL}/${recipeId}/likes`,{
-            method:'post',
+            method:'POST',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        return res.json()
+    }catch(err){
+        console.log(err)
+    }
+}
+
+const deleteLike = async (recipeId) =>{
+    try{
+        const res = await fetch(`${BASE_URL}/${recipeId}/likes`,{
+            method:'DELETE',
             headers:{
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
@@ -144,5 +159,6 @@ export{
     createComment,
     deleteComment,
     updateComment,
-    addLike
+    addLike,
+    deleteLike
 }
