@@ -3,15 +3,18 @@
 .signin {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(600px, 1fr) 420px;
+  grid-template-columns: minmax(520px, 1fr) 420px;
   align-items: stretch;
 }
 
 .signin {
+  min-width: 900px
   align-items: center;
   
 }
 .signin__left {
+  min-width: 520px;    
+  height: 100vh;
   overflow: hidden;
 }
 

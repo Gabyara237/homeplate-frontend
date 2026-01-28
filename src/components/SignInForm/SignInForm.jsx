@@ -8,6 +8,8 @@ import { signIn } from '../../services/authService';
 import { UserContext } from '../../contexts/UserContext';
 import './SignInForm.css';
 import signinPhoto from "../../assets/foodphoto.jpg"
+import { Link } from 'react-router';
+
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -60,8 +62,8 @@ const SignInForm = () => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div>
+      
+       
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -73,12 +75,22 @@ const SignInForm = () => {
             required
           />
         </div>
+        
         <div>
           <button className= "signin__btn"> Sign In</button>
           <button className= "cancel__btn"
           onClick={() => navigate('/')}>Cancel</button>
         </div>
+
+
       </form>
+      <p className="signin_switch">
+      Don’t have an account?{' '}
+      <Link to="/sign-up">Sign up!</Link>
+      </p>
+
+
+      
       </section>
     </main>
   );

@@ -1,9 +1,8 @@
-#root {
+  #root {  
   padding: 20px;
   margin: 0 ;
-  background-image: url("./assets/foodbg.png");
   text-align: center;
-}
+ }
 
 /* .logo {
   height: 6em;

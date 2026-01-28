@@ -12,7 +12,7 @@ export default function PublicHome() {
       {/* Top bar */}
       <header className="public-home__header">
         <h2 className="logo">HomePlate</h2>
-        <Link to="/login" className="btn btn-primary">
+        <Link to="/sign-in" className="btn btn-primary">
           Log in
         </Link>
       </header>
