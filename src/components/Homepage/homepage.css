@@ -1,0 +1,44 @@
+.recipe-main{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+.btn-create-recipe{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+
+    background-color: rgba(183, 255, 183, 0.75);
+    border: 2px solid #2fbf2f;
+    color: #103f3c;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+
+.btn-create-recipe:hover{
+    transform: scale(1.09);
+}
+
+.action{
+    margin-bottom: 20px;
+    justify-self: end;
+}
+
+.separator{
+    outline: #1f6d2c;
+    padding: px;
+    margin-bottom: 26px;
+    border-bottom: 2px solid var(--line);
+}
+
+.img-food{
+    width: 25px;
+}
