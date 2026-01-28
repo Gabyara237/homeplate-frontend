@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import * as recipeService from '../../services/recipeService';
 
+import './recipeform.css'
 
 const initialState = {
     title: '',
@@ -98,171 +99,247 @@ const RecipeForm =({handleAddRecipe, handleUpdateRecipe})=>{
 
     return(
         <main>
-            <h1>{recipeId ? 'Edit Recipe' : 'Create new Recipe'}</h1>
-            <form onSubmit={hadleSubmit}>
-                <div>
+            <h3>{recipeId ? 'Edit Recipe' : 'Create new Recipe'}</h3>
+            <form className="form" onSubmit={hadleSubmit}>
+                <div className="general-info">
 
                     <h3> General Information </h3>
-                    <label htmlFor="title">Recipe title</label>
-                    <input
-                        required
-                        type='text'
-                        name='title'
-                        id='title'
-                        value={formData.title}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="imageUrl">Image URL</label>
-                    <input
-                        required
-                        type='text'
-                        name='imageUrl'
-                        id='imageUrl'
-                        value={formData.imageUrl}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="description">Description</label>
-                    <textarea
-                        required
-                        type='text'
-                        name='description'
-                        id='description'
-                        value={formData.description}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="typeRecipe">Type of recipe</label>
-                    <select
-                        required
-                        name='typeRecipe'
-                        id='typeRecipe'
-                        value={formData.typeRecipe}
-                        onChange={handleChange}
-                        >
-                        <option value='Breakfast'>Breakfast</option>
-                        <option value='Lunch'>Lunch</option>
-                        <option value='Dinner'>Dinner</option>
-                        <option value='Dessert'>Dessert</option>
-                        <option value='Snack'>Snack</option>
-                    </select>
-                    <label htmlFor="tags">Tags</label>
-                    <input
-                        required
-                        type='text'
-                        name='tags'
-                        id='tags'
-                        value={formData.tags}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="prepTime">Preparation time</label>
-                    <input
-                        required
-                        type='number'
-                        name='prepTime'
-                        id='prepTime'
-                        value={formData.prepTime}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="servings">Servings</label>
-                    <input
-                        required
-                        type='number'
-                        name='servings'
-                        id='servings'
-                        value={formData.servings}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="difficultyLevel">Level of difficulty</label>
-                    <select
-                        required
-                        name='difficultyLevel'
-                        id='difficultyLevel'
-                        value={formData.difficultyLevel}
-                        onChange={handleChange}
-                        >
-                        <option value='Easy'>Easy</option>
-                        <option value='Medium'>Medium</option>
-                        <option value='Hard'>Hard</option>
-                    </select>
+                    <div className="div-form">
+                        <label htmlFor="title">Recipe title</label>
+                        <input
+                            className="input"
+                            required
+                            type='text'
+                            name='title'
+                            id='title'
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="div-form">
+                        <label htmlFor="imageUrl">Image URL</label>
+                        <input
+                            className="input"
+                            required
+                            type='text'
+                            name='imageUrl'
+                            id='imageUrl'
+                            value={formData.imageUrl}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="div-form"> 
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            className="textarea"
+                            required
+                            type='text'
+                            name='description'
+                            id='description'
+                            value={formData.description}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="type-tags">
+                        <div className="type-form">
+                            <label htmlFor="typeRecipe">Type of recipe</label>
+                            <select
+                                required
+                                name='typeRecipe'
+                                id='typeRecipe'
+                                value={formData.typeRecipe}
+                                onChange={handleChange}
+                                >
+                                <option value='Breakfast'>Breakfast</option>
+                                <option value='Lunch'>Lunch</option>
+                                <option value='Dinner'>Dinner</option>
+                                <option value='Dessert'>Dessert</option>
+                                <option value='Snack'>Snack</option>
+                            </select>
+                        </div>
+                        <div className="tags-form">
+                            <div className="tags-for2">
+                                <label htmlFor="tags">Tags</label>
+                                <input
+                                    className="input"
+                                    required
+                                    type='text'
+                                    name='tags'
+                                    id='tags'
+                                    value={formData.tags}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <p>Separate your tags with commas </p>
+                        </div>
+                    </div>
+                    <div className="time-difficulty">
+                        <div className="time">
+                            <label htmlFor="prepTime">Preparation time</label>
+                            <div className="input-info">
+                                <input
+                                    className="input"
+                                    required
+                                    type='number'
+                                    name='prepTime'
+                                    id='prepTime'
+                                    value={formData.prepTime}
+                                    onChange={handleChange}
+                                />
+                                <p className="people">min</p>
+
+                            </div>
+                        </div>
+                        <div className="servings">
+                            <label htmlFor="servings">Servings</label>
+                            <div className="input-info">
+                                <input
+                                    className="input"
+                                    required
+                                    type='number'
+                                    name='servings'
+                                    id='servings'
+                                    value={formData.servings}
+                                    onChange={handleChange}
+                                />
+                                <p className="people">people</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="difficulty">
+                        <label htmlFor="difficultyLevel">Level of difficulty</label>
+                        <select
+                            className="select"
+                            required
+                            name='difficultyLevel'
+                            id='difficultyLevel'
+                            value={formData.difficultyLevel}
+                            onChange={handleChange}
+                            >
+                            <option value='Easy'>Easy</option>
+                            <option value='Medium'>Medium</option>
+                            <option value='Hard'>Hard</option>
+                        </select>
+                    </div>
 
                 </div>
-                <div>
+                <div className="list-ingredients">
 
                     <h3> List of ingredients </h3>
-                    {formData.ingredients.map((ingredient, index)=>(
-                        <div key={index}>
-                            <label htmlFor="nameIngredient">Name of ingredients</label>
-                            <input
-                                required
-                                type='text'
-                                name='nameIngredient'
-                                id='nameIngredient'
-                                value={ingredient.nameIngredient}
-                                onChange={(evt) =>handleIngredientChange(index, "nameIngredient", evt.target.value)}
-                            />
+                    <div className="ingredient-container">
 
-                            <label htmlFor="unitQuantity">Unit/quantity</label>
-                            <input
-                                required
-                                type='number'
-                                name='unitQuantity'
-                                id='unitQuantity'
-                                value={ingredient.unitQuantity}
-                                onChange={(evt)=>handleIngredientChange(index,"unitQuantity", evt.target.value)}
-                            />
+                        {formData.ingredients.map((ingredient, index)=>(
+                            <div className="ingredient" key={index}>
                         
-                            {formData.ingredients.length>1 && (
-                                <button type="button" onClick={()=> removeIngredient(index)}>
-                                    Remove
-                                </button>
-                            )}
+                                
+                                    <div className="name-ingredient">
+                                        <div className="num-title">
+                                            <p className="step-num">{index+1}</p>
+                                            <label htmlFor="nameIngredient">Name of ingredients</label>
+                                        </div>    
+                                        <div>
+                                            <input
+                                                className="input"
+                                                required
+                                                type='text'
+                                                name='nameIngredient'
+                                                id='nameIngredient'
+                                                value={ingredient.nameIngredient}
+                                                onChange={(evt) =>handleIngredientChange(index, "nameIngredient", evt.target.value)}
+                                                />
 
-                        </div>
+                                        </div>
 
-                    ))}
-                    <button type="button" onClick={addIngredient}>
-                        + Add ingredient
-                    </button>
+                                    </div>
+                                    <div className="unit-quantity">
+                                        <label htmlFor="unitQuantity">Unit/quantity</label>
+                                        <input
+                                            className="input"
+                                            required
+                                            type='number'
+                                            name='unitQuantity'
+                                            id='unitQuantity'
+                                            value={ingredient.unitQuantity}
+                                            onChange={(evt)=>handleIngredientChange(index,"unitQuantity", evt.target.value)}
+                                            />
+                                        
+                                    </div>
+                            
+                                    {formData.ingredients.length>1 && (
+                                        <button className="btn-create-recipe btn-remove-form"  type="button" onClick={()=> removeIngredient(index)}>
+                                            Remove
+                                        </button>
+                                    )}
+
+                            </div>
+
+                        ))}
+                        <button className="btn-create-recipe btn-add-form" type="button" onClick={addIngredient}>
+                            + Add ingredient
+                        </button>
+                    </div>
                 </div>
-                <div>
+                <div className="steps">
                     <h3> Steps for the recipe </h3>
-                    {formData.steps.map((step, index)=>(
-                        <div key={index}>
+                    <div className="steps-container">
+                        {formData.steps.map((step, index)=>(
+                            <div className="step" key={index}>
+                                <div className="step-title">
+                                    <div className="num-title">
+                                        <p className="step-num">{index+1}</p>
+                                        <label htmlFor="stepTitle">Step title</label>
+                                    </div>
+                                    <div >
+                                        <input
+                                            className="input"
+                                            required
+                                            type='text'
+                                            name='stepTitle'
+                                            id='stepTitle'
+                                            value={step.stepTitle}
+                                            onChange={(evt)=> handleStepChange(index,"stepTitle", evt.target.value)}
+                                        />
+                                    </div>
 
-                            <label htmlFor="stepTitle">Step title</label>
-                            <input
-                                required
-                                type='text'
-                                name='stepTitle'
-                                id='stepTitle'
-                                value={step.stepTitle}
-                                onChange={(evt)=> handleStepChange(index,"stepTitle", evt.target.value)}
-                            />
+                                </div>
 
-                            <label htmlFor="stepDescription">Description of the step</label>
-                            <textarea
-                                required
-                                type='text'
-                                name='stepDescription'
-                                id='stepDescription'
-                                value={step.stepDescription}
-                                onChange={(evt)=>handleStepChange(index,"stepDescription", evt.target.value)}
-                            />
+                                <div className="step-description">
+                                    <label htmlFor="stepDescription">Description of the step</label>
+                                    <textarea
+                                        className="textarea"
+                                        required
+                                        type='text'
+                                        name='stepDescription'
+                                        id='stepDescription'
+                                        value={step.stepDescription}
+                                        onChange={(evt)=>handleStepChange(index,"stepDescription", evt.target.value)}
+                                    />
 
-                            {formData.steps.length>1 &&(
-                                <button type="button" onClick={()=>removeStep(index)}>
-                                    Remove
-                                </button>
-                            )}
-                        </div>
+                                </div>
+                           
+                                    {formData.steps.length>1 &&(
+                                        <button className="btn-create-recipe btn-remove-form" type="button" onClick={()=>removeStep(index)}>
+                                            Remove
+                                        </button>
+                                    )}
 
-                    ))}
-                    <button type="button" onClick={addStep}>
-                        + Add Step
-                    </button>
+                                
 
+                            </div>
+
+                        ))}
+                        <button className="btn-create-recipe btn-add-form" type="button" onClick={addStep}>
+                            + Add Step
+                        </button>
+                    </div>
+                </div>
+                <div className="btn-actions">
+                    <Link className="btn-create-recipe btn-cancel-form" to={'/'}>Cancel</Link>
+                    <button className="btn-create-recipe btn-form" type='submit'>{recipeId ? 'EDIT RECIPE': 'CREATE RECIPE'}</button>
                 </div>
 
-                <button type='submit'>{recipeId ? 'EDIT RECIPE': 'CREATE RECIPE'}</button>
             </form>
         </main>
     )

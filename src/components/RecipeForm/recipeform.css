@@ -1,0 +1,150 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    gap:20px
+}
+
+.general-info,.list-ingredients,.steps{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 3px solid #2fbf2f5e;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 10px 30px rgba(0, 0, 0, 0.05);
+    gap: 10px;
+    text-align: left;
+}
+
+.div-form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.type-tags,.time-difficulty{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.type-form, .tags-form, .time, .servings, .name-ingredient,.unit-quantity,.ingredient,.step, .step-title, .step-description,.difficulty,.tags-for2{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.tags-form{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.input,.textarea,.select{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #4f6c4f94;
+}
+
+.textarea{
+    height: 45px;
+}
+
+.ingredient,.step{
+    align-items: baseline;
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+
+.btn-form, .btn-cancel-form{
+    width: 150px;
+    align-self: anchor-center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7), 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.btn-add-form{
+    padding: 4px 6px;
+}
+
+.btn-remove-form,.btn-cancel-form{
+    padding: 7px;
+    background-color: #7d0000;
+    border: 2px solid #960000;
+    color: #ffffff;
+    font-weight: 500;
+}
+.step-num{
+    width: 13px;
+    padding: 7px 14px;
+    background-color: #c8fec9;
+    border-radius: 100px;
+    margin: 0;
+}
+
+.people{
+    font-size: 15px;
+    margin: 0;
+}
+.btn-cancel-form{
+    width: 45px;
+    font-weight: 700;
+}
+
+.btn-actions{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.tags-form p{
+    margin: 2px;
+    font-size: 12px;
+}
+
+.num-title,.input-info{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+
+
+  .type-form,
+  .tags-form, 
+  .time .input,
+  .servings,.select,.step-title,.step-description,.unit-quantity {
+        width: 100%;
+        align-items: normal;
+        margin-bottom: 5px;
+        flex-direction: column;
+        
+  }
+
+   .time-difficulty,.type-tags,.ingredient,.step,.name-ingredient,.time{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+
+  }
+
+  .btn-remove-form{
+    align-self: center;
+  }
+  
+  .num-title{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .input{
+    width: 100%;
+  }
+
+ .input-info{
+    display: flex;
+    gap: 5px;
+  }
+}

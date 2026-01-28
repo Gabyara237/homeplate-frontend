@@ -90,9 +90,10 @@
 }
 
 .tag{
-    padding: 3px;
+    padding: 5px;
     background-color: #cc00ef3b;
     border-radius: 5px;
+    font-size: 18px;
 }
 
 .interaction-recipes{
@@ -168,9 +169,6 @@
 .type-snack {
   background-color: #d9d2e9;
 }
-
-
-
 
 
 
