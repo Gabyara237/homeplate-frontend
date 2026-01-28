@@ -7,13 +7,13 @@ import PublicHome from "./components/PublicHome/PublicHome";
 import Homepage from './components/Homepage/Homepage';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import RecipeForm from './components/RecipeForm/RecipeForm';
-import CommentForm from './components/CommentForm/CommentForm';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import NavBar from './components/NavBar/NavBar';
 import { UserContext } from './contexts/UserContext';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import Follow from './components/Follow/Follow';
+import './App.css'
 
 
 
