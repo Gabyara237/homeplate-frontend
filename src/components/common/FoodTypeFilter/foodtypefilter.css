@@ -1,0 +1,26 @@
+.filter-container{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 20px;
+}
+
+
+.btn-filters{
+    padding: 5px;
+    border: none;
+    background-color: #cafec9;
+    border-radius: 5px;
+    width: 75px;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.20);
+    color: #103f3c;
+}
+
+.selected{
+    background-color: #103f3c;
+    color: white;
+}
+
+.btn-filters:hover{
+    transform: scale(1.09);
+}
