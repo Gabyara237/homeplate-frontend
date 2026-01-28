@@ -31,10 +31,10 @@ export default function PublicHome() {
             and share your own.
           </p>
           <div className="main-actions">
-            <Link to="/signup" className="btn btn-outline">
+            <Link to="/sign-up" className="btn btn-outline">
               Create account
             </Link>
-            <Link to="/login" className="btn btn-primary">
+            <Link to="/sign-in" className="btn btn-primary">
               Log in
             </Link>
           </div>
@@ -51,7 +51,7 @@ export default function PublicHome() {
         </section>
   {/* Bottom  */}
         <div className="bottom">
-          <Link to="/signup" className="btn btn-outline">
+          <Link to="/sign-up" className="btn btn-outline">
             Create account
           </Link>
         </div>

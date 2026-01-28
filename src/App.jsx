@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext} from 'react';
 
 import * as recipeService from './services/recipeService'
 
@@ -10,12 +10,15 @@ import RecipeForm from './components/RecipeForm/RecipeForm';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import NavBar from './components/NavBar/NavBar';
+import { UserContext } from './contexts/UserContext';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import Follow from './components/Follow/Follow';
 import './App.css'
 
 
 
 const App = () => {
-                      
+  const {user} = useContext(UserContext);
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState([])
 
@@ -77,21 +80,32 @@ const App = () => {
     navigate(`/recipes/${recipeId}`);
   };
 
-  return(
-     <>
-      <NavBar />
-      <Routes>
-        <Route path='/sign-up' element={<SignUpForm />} />
-        <Route path="/sign-in" element={<SignInForm />} />
-        <Route path="/" element={<PublicHome />} />
-        <Route path='/recipes' element={<Homepage recipes={recipes}/>}/>
-        <Route path='/recipes/new' element={<RecipeForm handleAddRecipe={handleAddRecipe} />}/>
-        <Route path='/recipes/:recipeId' element={<RecipeDetails handleDeleteRecipe={handleDeleteRecipe}/>}/>
-        <Route path='/recipes/:recipeId/edit' element={<RecipeForm handleUpdateRecipe={handleUpdateRecipe}/>}/>
-      </Routes>
-    </>
-  );
-};
+    return(
+        <>
+          <NavBar />
+          <Routes>
+            
+      <Route path="/" element={user ? <Homepage recipes={recipes}/> :<PublicHome />} />
+          {user ? (
+          <>
+            <Route path="/home" element={<Homepage recipes={recipes} />} />
+            <Route path="/add-recipe" element={<RecipeForm handleAddRecipe={handleAddRecipe} />} />
+            <Route path="/my-recipes" element={<Homepage recipes={recipes} />} />
+            <Route path="/recipes/:recipeId" element={<RecipeDetails handleDeleteRecipe={handleDeleteRecipe} />} />
+            <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={handleUpdateRecipe} />} />
+            <Route path="/profile" element={<ProfilePage />} />
+             <Route path="/follow" element={<Follow />} />
+          </>  
+          ):(
+          <>
+            <Route path='/sign-up' element={<SignUpForm />} />
+            <Route path="/sign-in" element={<SignInForm />} />
+          </>
+          )}
+          </Routes>
+      </>
+    );
+  };
 
 export default App;
 
