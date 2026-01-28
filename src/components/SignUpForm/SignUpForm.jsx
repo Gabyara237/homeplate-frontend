@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
+import './SignUpForm.css';
+import signinPhoto from "../../assets/foodphoto.jpg"
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -39,8 +41,14 @@ const SignUpForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
+    <main className="signup">
+       <section className="signup__left" >
+      <img src={signinPhoto}/>
+    </section>
+
+    <section className="signup__right">
+      <h1 className="signup__title">HomePlate</h1>
+      <h3> Sign Up</h3>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
@@ -77,10 +85,11 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <button className='signup__btn' disabled={isFormInvalid()}>Sign Up</button>
+          <button className= "cancel__btn" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
+      </section>
     </main>
   );
 };
