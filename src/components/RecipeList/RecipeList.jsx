@@ -4,7 +4,7 @@ import * as recipeService from '../../services/recipeService';
 import * as followService from '../../services/followService'
 import { useContext, useEffect, useMemo, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import './homepage.css'
+import './recipelist.css'
 import FoodTypeFilter from "../common/FoodTypeFilter/FoodTypeFilter";
 
 import foodImage from '../../assets/food.png'
