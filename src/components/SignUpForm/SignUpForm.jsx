@@ -6,7 +6,7 @@ import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
 import './SignUpForm.css';
-import signinPhoto from "../../assets/foodphoto.jpg"
+import signinPhoto from "../../assets/signup.jpg"
 
 const SignUpForm = () => {
   const navigate = useNavigate();
