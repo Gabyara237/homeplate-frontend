@@ -1,46 +1,18 @@
 import { Link } from "react-router";
 import RecipeCard from "../common/RecipeCard/RecipeCard";
-import * as recipeService from '../../services/recipeService';
-import * as followService from '../../services/followService'
-import { useContext, useEffect, useMemo, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useMemo, useState } from "react";
 import './recipelist.css'
 import FoodTypeFilter from "../common/FoodTypeFilter/FoodTypeFilter";
 
 import foodImage from '../../assets/food.png'
 
-const RecipeList = ({recipes}) =>{
+const RecipeList = ({recipes, toggleLike, followingIds, handleFollow}) =>{
 
-    const {user} = useContext(UserContext);
-    const userId =user?._id;
+
     const FOODTYPES = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack' ]
 
-    const [followingIds, setFollowingIds] = useState(new Set());
     const [selectedTypes, setSelectedTypes] = useState(["All"])
 
-    useEffect(()=>{
-        const fetchMyFollowing = async () =>{
-            if(!userId){
-                setFollowingIds(new Set());
-                return;
-            }
-
-            try{
-                const data = await followService.getMyFollowing();
-                const followingList = new Set(data.following.map(following => following._id));
-                setFollowingIds(followingList)
-            }catch(err){
-                console.log(err)
-            }
-        }
-
-        fetchMyFollowing();
-    },[userId])
-
-    const toggleLike = async (recipeId, shouldLike) => {
-        if (shouldLike) return recipeService.addLike(recipeId);     
-        return recipeService.deleteLike(recipeId);                  
-    };
 
     const toggleType = (selectedType) => {
         setSelectedTypes((prev) => {
@@ -66,38 +38,6 @@ const RecipeList = ({recipes}) =>{
 
     },[recipes,selectedTypes])
 
-    const handleFollow = async (targetUserId, shouldFollow) => {
-        setFollowingIds(prev =>{
-            const next = new Set(prev);
-            if(shouldFollow){
-                next.add(targetUserId)
-            }else{
-                next.delete(targetUserId)
-            }
-            return next;
-        })
-
-        try {
-            if (shouldFollow) {
-                await followService.followUser(targetUserId);
-            }else{
-                await followService.unfollowUser(targetUserId);
-                
-            }
-        } catch (err) {
-            setFollowingIds(prev =>{
-                const next = new Set(prev);
-                if (shouldFollow){
-                    next.delete(targetUserId)
-                }else{
-                    next.add(targetUserId);
-                }
-                return next;
-            })
-            console.log(err);
-            throw err; 
-        }
-    };
 
     return (
         <main >

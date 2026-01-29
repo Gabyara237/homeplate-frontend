@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import './commentform.css'
 
 const CommentForm = ({ initialText = "", onSubmit, submitLabel = "Submit" }) =>{
     
@@ -18,16 +19,21 @@ const CommentForm = ({ initialText = "", onSubmit, submitLabel = "Submit" }) =>{
 
     return (
         <form onSubmit ={handleSubmit} >
-            <label htmlFor="text">Your comment</label>
-            <textarea
-                required
-                type="text"
-                id="text"
-                name="text"
-                value={formData.text}
-                onChange={handleChange}
-            />
-            <button type="submit"> {submitLabel}</button>
+            <div>
+                <label htmlFor="text">Your comment</label>
+            </div>
+            <div className="input-area-comment">
+                <textarea
+                    className="comment-textarea"
+                    required
+                    type="text"
+                    id="text"
+                    name="text"
+                    value={formData.text}
+                    onChange={handleChange}
+                />
+                <button className="btn-create-recipe btn-add-form" type="submit"> {submitLabel}</button>
+            </div>
         </form>
     )
 

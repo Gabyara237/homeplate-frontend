@@ -14,9 +14,9 @@
   position: relative;
   min-height: 100vh;
   width: 100%;
-   /* background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center; * */
+  background-position: center;
 
   
 }
@@ -24,16 +24,10 @@ h1 {
   font-size: 45px;
 }
 
-p {
+.p-public-home{
   font-size: 20px;
 }
 
-/* .public-home::before {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.55);
-  pointer-events: none;
-} */
 
 .public-home > * {
   position: relative;

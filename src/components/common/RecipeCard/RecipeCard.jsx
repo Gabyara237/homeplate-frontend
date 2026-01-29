@@ -1,59 +1,13 @@
-import { useContext, useState } from "react";
 import { Link } from "react-router";
 
 import timeImage from '../../../assets/time.png'
 import servingImage from '../../../assets/servings.png'
-import heartImage from '../../../assets/heart.png';
-import heartRedImage from '../../../assets/heartRed.png'
-import commentImage from '../../../assets/comment.png'
-
+import LikeButton from '../LikeButton/LikeButton'
+import FollowButton from "../FollowButton/FollowButton";
 import './recipeCard.css'
 
-import { UserContext } from '../../../contexts/UserContext';
 
 const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
-    const { user } = useContext(UserContext);
-    const userId = user?._id;
-    const initialLiked = userId ? recipe.likes.includes(userId) : false;
-    const initialLikesCount = recipe.likes.length;
-    const authorId =recipe.author._id;
-
-    const [liked, setLiked]= useState(initialLiked);
-    const [likesCount, setLikesCount] = useState(initialLikesCount)
-   
-    const followed = userId ? followingIds.has(authorId) : false;
-
-
-    const handleChangeLike = async()=>{
-        if (!userId) return;
-
-        const nextLiked = !liked;
-
-        setLiked(nextLiked);
-        setLikesCount((count)=>count+(nextLiked ? 1: -1));
-
-        try{
-            await toggleLike(recipe._id,nextLiked)
-
-        }catch (err){
-            setLiked(!nextLiked);
-            setLikesCount((count)=> count + (nextLiked? -1 : 1));
-            console.log(err)
-        }
-    }
-
-    const handleChangeFollow = async (targetUserId) =>{
-        if(!userId) return;
-        if(targetUserId === userId) return;
-
-        const nextFollowed = !followed;
-        
-        try {
-            await handleFollow(targetUserId, nextFollowed);
-        } catch (err) {
-            console.log(err)
-        }
-    }
 
     return(
         <div className="main-container" key={recipe._id}> 
@@ -63,9 +17,7 @@ const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
                     <p>{recipe.author.username}</p>
 
                 </div>
-                {
-                    (recipe.author._id !== user._id)? <button className="btn-follow" onClick={()=>handleChangeFollow(authorId)}>{followed? "Unfollow": <><span className="plus"> + </span> Follow</>}</button> :<></>
-                }
+                <FollowButton recipe={recipe} followingIds={followingIds} handleFollow={handleFollow}/>
                 
             </div>
             <div className="card-info-container">
@@ -114,16 +66,8 @@ const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
                 </Link>
 
             </div>
-            <div className="interaction-recipes">
-                <div className="likes">
-                    <p>{likesCount}</p>
-                    <button className="btn-like" onClick={handleChangeLike}>{liked? <img  className="icon2" src={heartRedImage} alt="unlike" />:<img  className="icon2" src={heartImage} alt="like" />}</button> 
-                </div>
-                <div className="comments">
-                    <p>{recipe.comments.length}</p>
-                    <img  className="icon" src={commentImage} alt="comment" />
-                </div>
-            </div>
+            <LikeButton recipe={recipe} toggleLike={toggleLike}/> 
+            
         </div>
     )
 

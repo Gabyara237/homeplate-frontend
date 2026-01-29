@@ -25,7 +25,7 @@ export default function PublicHome() {
             <span>recipes with a vibrant culinary community.</span>
           </h1>
 
-          <p>
+          <p className="p-public-home">
             Sign up to access a wide variety of recipes
             <br />
             and share your own.

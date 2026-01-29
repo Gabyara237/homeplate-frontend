@@ -8,10 +8,11 @@
 }
 
 .signin {
-  min-width: 900px
+  min-width: 900px;
   align-items: center;
   
 }
+
 .signin__left {
   min-width: 520px;    
   height: 100vh;
@@ -45,7 +46,6 @@
   color: #254624ff; 
   text-align: start;
   display: flex;
-  justify-content:
   
 }
 
