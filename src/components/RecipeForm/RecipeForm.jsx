@@ -144,6 +144,7 @@ const RecipeForm =({handleAddRecipe, handleUpdateRecipe})=>{
                         <div className="type-form">
                             <label htmlFor="typeRecipe">Type of recipe</label>
                             <select
+                                className="select"
                                 required
                                 name='typeRecipe'
                                 id='typeRecipe'
