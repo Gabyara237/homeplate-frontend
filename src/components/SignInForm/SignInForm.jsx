@@ -7,7 +7,7 @@ import { signIn } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
 import './SignInForm.css';
-import signinPhoto from "../../assets/foodphoto.jpg"
+import signinPhoto from "../../assets/foodphoto.png"
 import { Link } from 'react-router';
 
 
