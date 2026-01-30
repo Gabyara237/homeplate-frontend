@@ -87,6 +87,9 @@
 .tags{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
 }
 
 .tag{

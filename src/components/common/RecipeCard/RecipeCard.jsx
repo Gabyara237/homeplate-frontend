@@ -53,7 +53,7 @@ const RecipeCard=({recipe,toggleLike, followingIds, handleFollow})=>{
                         </div>
                         <div className="tags">
                             {
-                                recipe.tags.map((tag,index)=>(
+                                recipe.tags.slice(0, 4).map((tag,index)=>(
                                     <p className="tag" key={index}>#{tag}</p>
                                     
                                 ))
