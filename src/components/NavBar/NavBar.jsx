@@ -49,7 +49,7 @@ const NavBar = () => {
           </li>
 
           <li className='nav-list'>
-            <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link" } to="/follow">
+            <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link" } to="/followers">
             <Follow className="icon"/>  Followers & Following
             </NavLink>
           </li>

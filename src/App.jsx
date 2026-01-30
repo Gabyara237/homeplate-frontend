@@ -13,7 +13,7 @@ import SignInForm from './components/SignInForm/SignInForm';
 import NavBar from './components/NavBar/NavBar';
 import { UserContext } from './contexts/UserContext';
 import ProfilePage from './components/ProfilePage/ProfilePage';
-import Follow from './components/Follow/Follow';
+import Followers from './components/Follow/Follow';
 import './App.css'
 
 const App = () => {
@@ -150,10 +150,8 @@ const App = () => {
           <Route path="/my-recipes" element={<RecipeList recipes={recipes.filter((recipe)=> recipe.author._id === userId)} toggleLike={toggleLike} followingIds={followingIds} handleFollow={handleFollow}/>} />
           <Route path="/recipes/:recipeId" element={<RecipeDetails handleDeleteRecipe={handleDeleteRecipe} toggleLike={toggleLike} followingIds={followingIds} handleFollow={handleFollow}  />} />
           <Route path="/recipes/:recipeId/edit" element={<RecipeForm handleUpdateRecipe={handleUpdateRecipe} />} />
+          <Route path="/followers" element={<Followers />} />
           <Route path="/profile" element={<ProfilePage recipes={recipes} toggleLike={toggleLike} followingIds={followingIds} handleFollow={handleFollow} />} />
-
-
-          <Route path="/follow" element={<Follow />} />
         </Routes>
       </main>
     </div>
