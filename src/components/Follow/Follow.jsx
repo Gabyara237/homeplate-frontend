@@ -6,9 +6,11 @@ import "./Follow.css";
 export default function Followers() {
   const { user } = useContext(UserContext);
 
-  const [tab, setTab] = useState("followers"); 
-  const [users, setUsers] = useState([]);
-  const [search, setSearch] = useState("");
+  const [activeTab, setActiveTab] = useState("followers");
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -16,105 +18,115 @@ export default function Followers() {
   const initial = username.charAt(0).toUpperCase();
 
   useEffect(() => {
-    const load = async () => {
+    const loadData = async () => {
       try {
-        setLoading(true);
-        setError("");
+        const followersData = await getMyFollowers();
+        const followingData = await getMyFollowing();
 
-        const data = tab === "followers"
-          ? await getMyFollowers()
-          : await getMyFollowing();
+        setFollowers(
+          Array.isArray(followersData.followers)
+            ? followersData.followers
+            : []
+        );
 
-        
-        const list =
-          tab === "followers"
-            ? (data?.followers || data || [])
-            : (data?.following || data || []);
-
-       
-        const normalized = Array.isArray(list)
-          ? list.map((item) => item.follower || item.following || item)
-          : [];
-
-        setUsers(normalized);
+        setFollowing(
+          Array.isArray(followingData.following)
+            ? followingData.following
+            : []
+        );
       } catch (err) {
-        setError(err.message || "Something went wrong");
-        setUsers([]);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    load();
-  }, [tab]);
+    loadData();
+  }, []);
 
-  const filteredUsers = users.filter((u) =>
-    (u?.username || "").toLowerCase().includes(search.toLowerCase())
+  const usersToShow =
+    activeTab === "followers" ? followers : following;
+
+  const filteredUsers = usersToShow.filter(user =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="followers-bg"> 
-    <main className="followers-page">
-      <section className="profile-header">
-        <div className="avatar">{initial}</div>
-        <h2>{username}</h2>
-        
-      </section>
+    <div className="followers-bg">
+      <main className="followers-page">
+        <section className="profile-header">
+          <div className="avatar">{initial}</div>
+          <h2>{username}</h2>
+        </section>
 
-      <section className="follow-tabs">
-        <button
-          className={tab === "followers" ? "active" : ""}
-          onClick={() => setTab("followers")}
-          type="button"
-        >
-          {tab === "followers" ? <strong>{users.length}</strong> : users.length} Followers
-        </button>
+        <div className="follow-tabs">
+          <button
+            className={activeTab === "followers" ? "active" : ""}
+            onClick={() => {
+              setActiveTab("followers");
+              setSearchInput("");
+              setSearchTerm("");
+            }}
+          >
+            {followers.length} Followers
+          </button>
 
-        <button
-          className={tab === "following" ? "active" : ""}
-          onClick={() => setTab("following")}
-          type="button"
-        >
-          {tab === "following" ? <strong>{users.length}</strong> : users.length} Following
-        </button>
+          <button
+            className={activeTab === "following" ? "active" : ""}
+            onClick={() => {
+              setActiveTab("following");
+              setSearchInput("");
+              setSearchTerm("");
+            }}
+          >
+            {following.length} Following
+          </button>
 
-        <div className="search-wrap">
-  <input
-    type="text"
-    placeholder="Search"
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-  />
-  <button className="search-btn" type="button">Search</button>
-</div>
-      </section>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                setSearchTerm(searchInput);
+              }
+            }}
+          />
 
-      {loading && <p>Loading...</p>}
-      {error && <p className="error">{error}</p>}
+          <button
+            className="search-btn"
+            type="button"
+            onClick={() => setSearchTerm(searchInput)}
+          >
+            Search
+          </button>
+        </div>
 
-      {!loading && !error && filteredUsers.length === 0 && (
-        <p className="empty">
-          {tab === "followers" ? "No followers yet." : "Not following anyone yet."}
-        </p>
-      )}
+        {loading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
 
-      <section className="user-list">
-        {filteredUsers.map((u) => (
-          <div className="user-card" key={u?._id || u?.id}>
-            <div className="user-info">
-              <div className="avatar small">
-                {(u?.username || "U").charAt(0).toUpperCase()}
-              </div>
-              <div>
-                <strong>{u?.username || "Unknown"}</strong>
-                <p>Lorem ipsum dolor sit amet, consecte</p>
+        {!loading && !error && filteredUsers.length === 0 && (
+          <p className="empty">
+            {activeTab === "followers"
+              ? "No followers yet."
+              : "Not following anyone yet."}
+          </p>
+        )}
+
+        <section className="user-list">
+          {filteredUsers.map(user => (
+            <div className="user-card" key={user._id}>
+              <div className="user-info">
+                <div className="avatar">
+                  {user.username[0].toUpperCase()}
+                </div>
+                <strong>{user.username}</strong>
               </div>
             </div>
-          </div>
-        ))}
-      </section>
-      
-    </main>
+          ))}
+        </section>
+      </main>
     </div>
   );
 }
