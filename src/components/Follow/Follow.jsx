@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { getMyFollowing, getMyFollowers } from "../../services/followService";
+
+import UserAvatar from "../common/UserAvatar/UserAvatar";
 import "./Follow.css";
 
 export default function Followers() {
@@ -15,7 +17,7 @@ export default function Followers() {
   const [loading, setLoading] = useState(true);
 
   const username = user?.username || "User";
-  const initial = username.charAt(0).toUpperCase();
+
 
   useEffect(() => {
     const loadData = async () => {
@@ -54,11 +56,7 @@ export default function Followers() {
   return (
     <div className="followers-bg">
       <main className="followers-page">
-        <section className="profile-header">
-          <div className="avatar">{initial}</div>
-          <h2>{username}</h2>
-        </section>
-
+        <UserAvatar username={username}/>
         <div className="follow-tabs">
           <button
             className={activeTab === "followers" ? "active" : ""}
@@ -118,7 +116,7 @@ export default function Followers() {
           {filteredUsers.map(user => (
             <div className="user-card" key={user._id}>
               <div className="user-info">
-                <div className="avatar">
+                <div className="avatar a-follower">
                   {user.username[0].toUpperCase()}
                 </div>
                 <strong>{user.username}</strong>

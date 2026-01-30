@@ -139,7 +139,7 @@
     border-radius: 100px;
 }
 
-.icon2:hover, .btn-follow:hover{
+.icon2:hover, .btn-follow:hover, .btn-edit:hover, .btn-save:hover{
     transform: scale(1.09);
     cursor: pointer;
 }

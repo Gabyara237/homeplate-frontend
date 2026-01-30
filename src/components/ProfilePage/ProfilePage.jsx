@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import * as userService from "../../services/userService";
 import RecipeList from "../RecipeList/RecipeList";
+
+import UserAvatar from "../common/UserAvatar/UserAvatar";
+
 import "./ProfilePage.css";
 
 const ProfilePage = ({
@@ -37,11 +40,9 @@ const ProfilePage = ({
 
   return (
     <main className="profile-page">
-      <h1 className="profile-title">{user.username}'s Profile</h1>
-
+      <UserAvatar username={user.username}/>
       {/* BIO SECTION */}
       <section className="profile-bio">
-        <h3>About</h3>
 
         {isEditing ? (
           <>
@@ -76,11 +77,15 @@ const ProfilePage = ({
             </button>
           </>
         )}
+        <div className="followers">
+          <p></p>
+
+        </div>
       </section>
 
       {/* RECIPES SECTION — reused homepage layout */}
       <section className="profile-recipes">
-        <h2>My Recipes</h2>
+        <h3 className="title-recipe-profile">My Recipes</h3>
 
         <RecipeList
           recipes={userRecipes}
