@@ -85,13 +85,13 @@ const App = () => {
     const payload= buildPayload(recipeFormData)
     const newRecipe= await recipeService.create(payload);
     setRecipes([newRecipe, ...recipes])
-    navigate("/recipes");
+    navigate(`/recipes/${newRecipe._id}`);
   };
 
   const handleDeleteRecipe = async(recipeId) =>{
     const deletedRecipe = await recipeService.deleteRecipe(recipeId)
     setRecipes(recipes.filter((recipe)=>recipe._id !== deletedRecipe._id));
-    navigate('/recipes');
+    navigate("/my-recipes");
   }
 
   const handleUpdateRecipe = async (recipeId, recipeFormData) => {

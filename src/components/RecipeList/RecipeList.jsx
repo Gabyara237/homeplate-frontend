@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import RecipeCard from "../common/RecipeCard/RecipeCard";
 import { useMemo, useState } from "react";
 import './recipelist.css'
@@ -13,6 +13,7 @@ const RecipeList = ({recipes, toggleLike, followingIds, handleFollow}) =>{
 
     const [selectedTypes, setSelectedTypes] = useState(["All"])
 
+    const location = useLocation();
 
     const toggleType = (selectedType) => {
         setSelectedTypes((prev) => {
@@ -42,7 +43,7 @@ const RecipeList = ({recipes, toggleLike, followingIds, handleFollow}) =>{
     return (
         <main >
             <div className="action">
-                <Link to="/recipes/new" className="btn-create-recipe">
+                <Link to="/recipes/new" className="btn-create-recipe" state={{ from: location.pathname }}>
                     <span className="plus">+</span> Create new recipe
                 </Link>
             </div>
@@ -56,7 +57,7 @@ const RecipeList = ({recipes, toggleLike, followingIds, handleFollow}) =>{
                     <RecipeCard key={recipe._id} recipe={recipe} toggleLike={toggleLike} followingIds={followingIds} handleFollow={handleFollow}/>
                 )):<div>
                     <h2>No recipes yet for this category <img className="img-food" src={foodImage} alt="foodImage"/> <br/>Be the first to share one and inspire others!</h2>
-                    <Link to="/recipes/new" className="btn-create-recipe">
+                    <Link to="/recipes/new" className="btn-create-recipe" state={{ from: location.pathname }}>
                         <span className="plus">+</span> Create new recipe
                     </Link>
                 

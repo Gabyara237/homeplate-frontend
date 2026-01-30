@@ -109,7 +109,7 @@ const RecipeDetails = ({handleDeleteRecipe, toggleLike, followingIds,handleFollo
 
           {recipe.author?._id === user?._id && (
             <div className="owner-actions">
-              <Link className='btn-create-recipe  btn-edit' to={`/recipes/${recipeId}/edit`}>Edit</Link>
+              <Link className='btn-create-recipe  btn-edit' to={`/recipes/${recipeId}/edit`} state={{ from: `/recipes/${recipeId}` }}>Edit</Link>
               <button className='btn-create-recipe btn-remove-form' type="button" onClick={() => handleDeleteRecipe(recipeId)}>Delete</button>
             </div>
           )}

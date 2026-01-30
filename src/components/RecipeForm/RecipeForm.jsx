@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from 'react-router';
+import { Link, useParams, useLocation } from 'react-router';
 import * as recipeService from '../../services/recipeService';
 
 import './recipeform.css'
@@ -19,7 +19,9 @@ const initialState = {
 
 const RecipeForm =({handleAddRecipe, handleUpdateRecipe})=>{
     const {recipeId} = useParams();
+    const location = useLocation();
 
+    const from = location.state?.from || "/";
     const [formData, setFormData] = useState(initialState)
 
     const handleChange =(evt) =>{
@@ -337,7 +339,7 @@ const RecipeForm =({handleAddRecipe, handleUpdateRecipe})=>{
                     </div>
                 </div>
                 <div className="btn-actions">
-                    <Link className="btn-create-recipe btn-cancel-form" to={'/'}>Cancel</Link>
+                    <Link className="btn-create-recipe btn-cancel-form" to={from}>Cancel</Link>
                     <button className="btn-create-recipe btn-form" type='submit'>{recipeId ? 'EDIT RECIPE': 'CREATE RECIPE'}</button>
                 </div>
 
