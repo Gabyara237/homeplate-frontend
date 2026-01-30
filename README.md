@@ -28,6 +28,14 @@ It includes protected routes, dynamic navigation depending on authentication sta
 - **Deployed Application:**  
   [Visit the live HomePlate application](https://new-homeplate.netlify.app/)
 
+## Screenshots
+
+![Public Home](https://i.imgur.com/HGsEh1F.jpeg) 
+
+![Profile Page](https://i.imgur.com/qbZ6ONZ.png) 
+
+![Create/Edit Recipe Form](https://i.imgur.com/FEFaa2X.png)
+
 
 ## Core Features
 
